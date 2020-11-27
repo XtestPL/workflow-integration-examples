@@ -28,4 +28,4 @@ jobs:
         run: mvn -B package --file demo-project/pom.xml
 
       - name: Run Jtest with maven
-        run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -Djtest.config="builtin://Recommended Rules"
+        run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
