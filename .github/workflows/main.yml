@@ -34,7 +34,7 @@ jobs:
           echo test, and deploy your project.
       # Runs custom action
       - id: foo  
-        uses: actions/action-examples@v1
+        uses: XtestPL/action-examples@v1
         with:
           who-to-greet: 'Mona the Octocat'
       - name: Echo random-number
