@@ -21,7 +21,7 @@ jobs:
       run: mvn -B package --file demo-project/pom.xml
   build-self-hosted:
     name: Build project on-premises
-    runs-on: self-hosted
+    runs-on: self-hosted # check array [self-hosted, windows, redish, x86] or redish only
     steps:
       - uses: actions/checkout@v2
       - name: Build with Maven
@@ -29,3 +29,16 @@ jobs:
 
       - name: Run Jtest with maven
         run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
+
+       #Archiving the findings reports as artifact
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Parasoft-Report
+          path: |
+            demo-project\target\jtest\report.html
+            demo-project\target\jtest\report.pdf
+
+#      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
+#      - uses: github/codeql-action/upload-sarif@v1
+#        with:
+#          sarif_file: demo-project\target\jtest\report.xml - TODO: SARIF FORMAT
