@@ -34,9 +34,8 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Parasoft-Report
-          path: |
-            demo-project\target\jtest\report.html
-            demo-project\target\jtest\report.pdf
+          path: demo-project\target\jtest\report.html
+            #demo-project\target\jtest\report.pdf
 
 #      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
 #      - uses: github/codeql-action/upload-sarif@v1
