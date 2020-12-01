@@ -34,7 +34,7 @@ jobs:
           echo test, and deploy your project.
       # Runs custom action
       - id: foo  
-        uses: actions/hello-world-composite-run-steps-action@v1
+        uses: actions/action-examples@v1
         with:
           who-to-greet: 'Mona the Octocat'
       - name: Echo random-number
