@@ -27,15 +27,15 @@ jobs:
       - uses: XtestPL/action-examples@v1
         with:
           build-system: 'maven'
-          build-system-args: --file demo-project/pom.xml -report demo-project/jtest-output
-      
+          build-system-args: --file demo-project/pom.xml
+          jtest-args: -report demo-project/jtest-output
       #Archiving the findings reports as artifact
       - uses: actions/upload-artifact@v2
         with:
           name: Parasoft-Report
           path: |
             demo-project/jtest-output/report.html
-            ddemo-project/jtest-output/report.pdf
+            demo-project/jtest-output/report.pdf
             
 #      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
 #      - uses: github/codeql-action/upload-sarif@v1
