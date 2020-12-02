@@ -33,6 +33,6 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       # Runs custom action
-      - uses: XtestPL/action-examples@master
+      - uses: XtestPL/action-examples
         with:
           build-system: 'gradle'
