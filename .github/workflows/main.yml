@@ -35,4 +35,4 @@ jobs:
       # Runs custom action
       - uses: XtestPL/action-examples@v1
         with:
-          build-system: 'gradle'
+          build-system: 'maven'
