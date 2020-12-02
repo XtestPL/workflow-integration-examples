@@ -36,3 +36,4 @@ jobs:
       - uses: XtestPL/action-examples@v1
         with:
           build-system: 'maven'
+          build-system-args: --file demo-project/pom.xml
