@@ -24,18 +24,16 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs jtest analyze that produce sarif
-      - uses: XtestPL/action-examples@v1
+      - uses: XtestPL/action-examples@v2
         with:
-          build-system: 'maven'
-          build-system-args: --file demo-project/pom.xml
-          jtest-args: -report demo-project/jtest-output
+          command: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
       #Archiving the findings reports as artifact
       - uses: actions/upload-artifact@v2
         with:
           name: Parasoft-Report
           path: |
-            demo-project/jtest-output/report.html
-            demo-project/jtest-output/report.pdf
+            demo-project/target/jtest/report.html
+            demo-project/target/jtest/report.pdf
             
 #      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
 #      - uses: github/codeql-action/upload-sarif@v1
