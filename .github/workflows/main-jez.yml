@@ -38,9 +38,10 @@ jobs:
         #   build-system-args: --file demo-project/pom.xml
         #   jtest-args: -report demo-project/jtest-output
       # Archives the findings reports as artifact
-      - uses: actions/upload-artifact@v2
+      - name: Upload report artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: Upload report artifacts
+          name: Report files
           path: |
             demo-project/target/jtest/report.html
             demo-project/target/jtest/report.pdf
