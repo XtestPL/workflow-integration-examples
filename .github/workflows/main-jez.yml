@@ -16,26 +16,34 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: redish
+    runs-on: self-hosted
+	env:
+		PROJECT_DIR: demo-project
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
 
-      # Runs jtest analysis and produces SARIF
-      - uses: XtestPL/action-examples@v1
-        with:
-          build-system: 'maven'
-          build-system-args: --file demo-project/pom.xml
-          jtest-args: -report demo-project/jtest-output
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository to $GITHUB_WORKSPACE
+        uses: actions/checkout@v2
+
+      # Runs static analysis and produces SARIF
+      - name: Run static analysis
+		working-directory: $PROJECT_DIR
+		run: mvnw jtest:jtest
+        #run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
+        # uses: XtestPL/action-examples@v1
+        # with:
+        #   build-system: 'maven'
+        #   build-system-args: --file demo-project/pom.xml
+        #   jtest-args: -report demo-project/jtest-output
       # Archives the findings reports as artifact
       - uses: actions/upload-artifact@v2
         with:
-          name: Parasoft Report Upload
+          name: Upload report artifacts
           path: |
-            demo-project/jtest-output/report.html
-            demo-project/jtest-output/report.pdf
+            $PROJECT_DIR/jtest-output/report.html
+            $PROJECT_DIR/jtest-output/report.pdf
             
 #      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
 #      - uses: github/codeql-action/upload-sarif@v1
