@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v2
 
       # Runs static analysis and produces SARIF
-      - run: echo proj $PROJECT_DIR
+      - run: echo proj $env:ROJECT_DIR
       - run: cd $PROJECT_DIR
       - name: Run static analysis
         run: mvn jtest:jtest
