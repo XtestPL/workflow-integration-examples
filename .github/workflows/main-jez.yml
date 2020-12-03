@@ -29,8 +29,8 @@ jobs:
 
       # Runs static analysis and produces SARIF
       - name: Run static analysis
-		working-directory: $PROJECT_DIR
-		run: mvnw jtest:jtest
+        run: mvnw jtest:jtest
+	#working-directory: $PROJECT_DIR
         #run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
         # uses: XtestPL/action-examples@v1
         # with:
@@ -38,12 +38,12 @@ jobs:
         #   build-system-args: --file demo-project/pom.xml
         #   jtest-args: -report demo-project/jtest-output
       # Archives the findings reports as artifact
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Upload report artifacts
-          path: |
-            $PROJECT_DIR/jtest-output/report.html
-            $PROJECT_DIR/jtest-output/report.pdf
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Upload report artifacts
+      #     path: |
+      #       $PROJECT_DIR/jtest-output/report.html
+      #       $PROJECT_DIR/jtest-output/report.pdf
             
 #      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
 #      - uses: github/codeql-action/upload-sarif@v1
