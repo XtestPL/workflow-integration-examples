@@ -30,7 +30,8 @@ jobs:
       # Runs static analysis and produces SARIF
       - name: Run static analysis
         run: mvnw jtest:jtest
-	#working-directory: $PROJECT_DIR
+
+        #working-directory: $PROJECT_DIR
         #run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
         # uses: XtestPL/action-examples@v1
         # with:
