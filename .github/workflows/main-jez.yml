@@ -17,8 +17,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: self-hosted
-    env:
-      PROJECT_DIR: demo-project
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,8 +26,6 @@ jobs:
         uses: actions/checkout@v2
 
       # Runs static analysis and produces SARIF
-      - run: echo proj $env:ROJECT_DIR
-      - run: cd $PROJECT_DIR
       - name: Run static analysis
         run: mvn jtest:jtest
         working-directory: demo-project
@@ -46,8 +42,8 @@ jobs:
         with:
           name: Upload report artifacts
           path: |
-            $PROJECT_DIR/target/jtest/report.html
-            $PROJECT_DIR/target/jtest/report.pdf
+            demo-project/target/jtest/report.html
+            demo-project/target/jtest/report.pdf
             
 #      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
 #      - uses: github/codeql-action/upload-sarif@v1
