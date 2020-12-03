@@ -37,9 +37,9 @@ jobs:
         # 2. 
         # -------------------------------------------------
         # Uncomment the following to run the "Recommended Rules" test configuration:
-        # run: mvn jtest:jtest
+        run: mvn jtest:jtest
         # Uncomment the following to run the specified test configuration with maven:
-        run: mvn clean jtest:jtest -Djtest.config="builtin://Recommended Rules"
+        # run: mvn clean jtest:jtest -Djtest.config="builtin://Recommended Rules"
         
 
         #run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
