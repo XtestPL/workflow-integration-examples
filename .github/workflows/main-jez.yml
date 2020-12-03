@@ -1,54 +1,54 @@
-# This is a basic workflow to help you get started with Actions
-
+# This workflow runs Parasoft Jtest analysis with selected build tool
+# Prerequisites:
+# 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory.
 name: Parasoft Jtest
 
-# Controls when the action will run. 
+# Define when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-#   push:
-#     branches: [ main ]
+  
+  # Triggers the workflow on push or pull request events
+  # push:
+  #   branches: [ main ]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows to run workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  jtest:
+    name: Parasoft Jtest
     # The type of runner that the job will run on
     runs-on: self-hosted
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    
     steps:
 
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Runs static analysis and produces SARIF
+      # Run static analysis
+      # TODO: describe how configure tool to produce SARIF
       - name: Run static analysis
-        
         # Configure working directory if it is different than repository root
         working-directory: demo-project
          
-        # Maven:
+        # -------------------------------------------------
+        # Running with Maven
+        # Prerequisites:
         # 1. Configure your Maven setup by following the Jtest User Guide:
         # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
-        # 2. 
         # -------------------------------------------------
         # Uncomment the following to run the "Recommended Rules" test configuration:
         run: mvn jtest:jtest
-        # Uncomment the following to run the specified test configuration with maven:
+        # or uncomment the following to run the specified test configuration:
         # run: mvn clean jtest:jtest -Djtest.config="builtin://Recommended Rules"
         
-
-        #run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
+        # TODO: remove if not needed
         # uses: XtestPL/action-examples@v1
         # with:
         #   build-system: 'maven'
         #   build-system-args: --file demo-project/pom.xml
         #   jtest-args: -report demo-project/jtest-output
-      # Archives the findings reports as artifact
+          
+      # Archive the findings reports as job artifact
       - name: Upload report artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -56,8 +56,10 @@ jobs:
           path: |
             demo-project/target/jtest/report.html
             demo-project/target/jtest/report.pdf
+          # demo-project/target/jtest/report.sarif
             
-#      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
+#      # Upload the findings into the GitHub code scanning alert section
 #      - uses: github/codeql-action/upload-sarif@v1
 #        with:
-#          sarif_file: demo-project/jtest-output/report.sarif #- TODO: PRODUCE JSON with SARIF FORMAT
+#          sarif_file: demo-project/target/jtest/report.sarif 
+#- TODO: PRODUCE JSON with SARIF FORMAT
