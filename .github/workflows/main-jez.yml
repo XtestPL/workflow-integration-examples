@@ -27,10 +27,18 @@ jobs:
 
       # Runs static analysis and produces SARIF
       - name: Run static analysis
-        working-directory: demo-project
         
-        # Uncomment and adjust one of the following to run with maven
+        # Configure working directory if it is different than repository root
+        working-directory: demo-project
+         
+        # Maven:
+        # 1. Configure your Maven setup by following the Jtest User Guide:
+        # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
+        # 2. 
+        # -------------------------------------------------
+        # Uncomment the following to run the "Recommended Rules" test configuration:
         # run: mvn jtest:jtest
+        # Uncomment the following to run the specified test configuration with maven:
         run: mvn clean jtest:jtest -Djtest.config="builtin://Recommended Rules"
         
 
