@@ -24,12 +24,13 @@ jobs:
     steps:
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repository to $GITHUB_WORKSPACE
+      - name: Checkout repository to ${{GITHUB_WORKSPACE}}
         uses: actions/checkout@v2
 
       # Runs static analysis and produces SARIF
       - name: Run static analysis
-        run: mvnw jtest:jtest
+        run: mvn jtest:jtest
+        working-directory: $PROJECT_DIR
 
         #working-directory: $PROJECT_DIR
         #run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
