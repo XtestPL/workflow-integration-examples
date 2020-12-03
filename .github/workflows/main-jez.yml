@@ -27,10 +27,13 @@ jobs:
 
       # Runs static analysis and produces SARIF
       - name: Run static analysis
-        run: mvn jtest:jtest
         working-directory: demo-project
+        
+        # Uncomment and adjust one of the following to run with maven
+        # run: mvn jtest:jtest
+        run: mvn clean jtest:jtest -Djtest.config="builtin://Recommended Rules"
+        
 
-        #working-directory: $PROJECT_DIR
         #run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules"
         # uses: XtestPL/action-examples@v1
         # with:
