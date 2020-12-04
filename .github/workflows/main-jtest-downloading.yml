@@ -29,7 +29,7 @@ jobs:
 #http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
       - name: Download Jtest
-        run: wget -P tool http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
+        run: wget --directory-prefix=tool http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
       - name: Prepare Jtest
         run: Get-ChildItem
       - run: unzip tool\parasoft_uta_2020.2.0_intellij.zip
