@@ -2,7 +2,7 @@
 # This workflow runs Parasoft Jtest analysis with selected build tool
 # -------------------------------------------------
 # Prerequisites:
-# 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory.
+# 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory
 name: Parasoft Jtest
 
 # Define when the action will run. 
@@ -17,7 +17,7 @@ on:
 
 jobs:
   jtest:
-    name: Job execution
+    name: Jtest job execution
     # The type of runner that the job will run on
     runs-on: self-hosted
     
@@ -52,7 +52,7 @@ jobs:
         #   build-system: 'maven'
         #   build-system-args: --file demo-project/pom.xml
         #   jtest-args: -report demo-project/jtest-output
-        
+      - run: echo dir $env:PROJECT_DIR
       # -------------------------------------------------
       # Archive the findings reports as job artifact
       - name: Upload report artifacts
