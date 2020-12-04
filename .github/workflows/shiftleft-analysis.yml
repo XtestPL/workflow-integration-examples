@@ -6,8 +6,8 @@ name: SL Scan
 # This section configures the trigger for the workflow. Feel free to customize depending on your convention
 on:
     workflow_dispatch:
-#     push:
-#         branches: [ main ]
+    push:
+        branches: [ main ]
     pull_request:
         branches: [ main ]
 jobs:
