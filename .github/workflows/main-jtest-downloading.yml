@@ -15,6 +15,10 @@ on:
   # Allows to run workflow manually from the Actions tab
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: ..\
+
 jobs:
   jtest:
     name: Jtest job execution
