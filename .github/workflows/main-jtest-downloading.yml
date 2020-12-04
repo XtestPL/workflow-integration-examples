@@ -34,7 +34,7 @@ jobs:
       - name: Download Jtest
         run: wget -OutFile $env:app_file $env:release_url$env:app_file
       - name: Unpack $env:app_file
-        run: unzip $env:app_file
+        run: unzip -o $env:app_file
       - name: List working directory
         run: Get-ChildItem
         
