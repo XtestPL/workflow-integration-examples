@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * 
  * @author Mark Wilson (mwilson@acme.com)
  */
-public class Customer {
+public class CustomerCopy {
 
     private static final String SSN_REGEX = "\\d\\d\\d-\\d\\d-\\d\\d\\d\\d";
 
@@ -19,7 +19,7 @@ public class Customer {
 
     private String _ssn;
 
-    public Customer(String name, String ssn) {
+    public CustomerCopy(String name, String ssn) {
         if (name.length() >= 20)
             throw new IllegalArgumentException("Name cannot be longer than 20 characters");
         if (!ssn.matches(SSN_REGEX))
