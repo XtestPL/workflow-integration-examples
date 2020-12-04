@@ -51,14 +51,14 @@ jobs:
         #   build-system: 'maven'
         #   build-system-args: --file demo-project/pom.xml
         #   jtest-args: -report demo-project/jtest-output
-      - run: echo dir $env:PROJECT_DIR
+      - run: echo "dir $env:PROJECT_DIR"
       # -------------------------------------------------
       # Archive the findings reports as job artifact
       - name: Upload report artifacts
         uses: actions/upload-artifact@v2
         with:
           name: Report files
-          path: $env:PROJECT_DIR/target/jtest/report.*
+          path: ${{ env:PROJECT_DIR }}/target/jtest/report.*
           # TODO cleanup
           #   demo-project/target/jtest/report.html
           #   demo-project/target/jtest/report.pdf
