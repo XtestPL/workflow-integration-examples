@@ -17,24 +17,23 @@ on:
 
 jobs:
   jtest:
-    name: Run Parasoft Jtest
+    name: Job execution
     # The type of runner that the job will run on
     runs-on: self-hosted
-    env:
-      VARNAME: demo-project
     
     steps:
-      - run: echo $env:VARNAME
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Run static analysis
       # TODO: describe how configure tool to produce SARIF
       - name: Run static analysis
         # -------------------------------------------------
-        # Configure working directory if it is different than repository root
-        working-directory: $env:VARNAME
+        # Prerequisites:
+        # 1. Configure working directory if it is different than repository root
+        working-directory: demo-project
+        # 2. Configure project directory
+        env:
+          PROJECT_DIR: demo-project
          
         # -------------------------------------------------
         # Running with Maven
@@ -60,8 +59,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Report files
-          path: demo-project/target/jtest/report.*
-          # |
+          path: $env:PROJECT_DIR/target/jtest/report.*
+          # TODO cleanup
           #   demo-project/target/jtest/report.html
           #   demo-project/target/jtest/report.pdf
           #   demo-project/target/jtest/report.sarif
@@ -70,5 +69,5 @@ jobs:
       # Upload the findings into the GitHub code scanning alert section
       # - uses: github/codeql-action/upload-sarif@v1
       #  with:
-      #    sarif_file: demo-project/target/jtest/report.sarif 
+      #    sarif_file: $env:PROJECT_DIR/target/jtest/report.sarif 
       #- TODO: PRODUCE JSON with SARIF FORMAT
