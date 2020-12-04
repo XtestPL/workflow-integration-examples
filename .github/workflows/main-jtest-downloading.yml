@@ -32,7 +32,7 @@ jobs:
         run: wget -P tool http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
       - name: Prepare Jtest
         run: Get-ChildItem
-      - run: unzip parasoft_uta_2020.2.0_intellij.zip
+      - run: unzip tool\parasoft_uta_2020.2.0_intellij.zip
         
       - name: Checkout repository
         uses: actions/checkout@v2
