@@ -28,7 +28,6 @@ jobs:
         run: mvn -B package --file demo-project/pom.xml
 
       - name: Run Jtest with maven
-        continue-on-error: true
         run: mvn clean --file demo-project/pom.xml test-compile jtest:agent test jtest:jtest -D'jtest.config'="builtin://Recommended Rules" -D'jtest.fail'=true
 
        #Archiving the findings reports as artifact
@@ -41,5 +40,6 @@ jobs:
 
 #      # Uploads the findings into the GitHub code scanning alert section using the upload-sarif action
       - uses: github/codeql-action/upload-sarif@v1
+        if: always()
         with:
           sarif_file: C:\Users\dszyszlak\Downloads\example_results.sarif #- TODO: PRODUCE JSON with SARIF FORMAT
