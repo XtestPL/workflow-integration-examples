@@ -15,7 +15,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * Parasoft Jtest UTA: Test class for Bank
  *
- * @author dszyszlak
+ * @author dszyszlakk
  * @see Bank
  */
 public class BankTest
