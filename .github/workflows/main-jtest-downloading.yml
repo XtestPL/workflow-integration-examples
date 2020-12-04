@@ -25,15 +25,15 @@ jobs:
     # The type of runner that the job will run on
     runs-on: self-hosted
     env:
-      release_url: http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/
-      app_file: parasoft_uta_2020.2.0_intellij.zip
+      release_url: http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/
+      app_file: parasoft_jtest_2020.2.0_win32_x86_64.zip
     
     steps:
 #http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
       - name: Download Jtest
         run: wget -OutFile $env:app_file $env:release_url$env:app_file
-      - name: Unpack $env:app_file
+      - name: Unpack app file
         run: unzip -o $env:app_file
       - name: List working directory
         run: Get-ChildItem
