@@ -54,7 +54,7 @@ jobs:
 
         # -------------------------------------------------
         # Running with Ant, running with Jtest data file - follow jtest examples README files and run a command
-        		# run: 
+        # run: 
           
       # -------------------------------------------------
       # Archive the findings reports as job artifact
