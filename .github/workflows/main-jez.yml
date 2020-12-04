@@ -17,19 +17,14 @@ on:
 
 jobs:
   jtest:
-    name: Parasoft Jtest
+    name: Run Parasoft Jtest
     # The type of runner that the job will run on
     runs-on: self-hosted
     env:
-      VARNAME: varvalue
+      VARNAME: demo-project
     
     steps:
-      - run: echo value $VARNAME
-      - run: echo "$VARNAME"
       - run: echo $env:VARNAME
-      - run: echo value %VARNAME% 
-      - run: dir env
-      - run: echo `env`
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -39,7 +34,7 @@ jobs:
       - name: Run static analysis
         # -------------------------------------------------
         # Configure working directory if it is different than repository root
-        working-directory: demo-project
+        working-directory: $env:VARNAME
          
         # -------------------------------------------------
         # Running with Maven
