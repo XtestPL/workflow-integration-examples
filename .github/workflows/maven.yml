@@ -21,6 +21,7 @@ jobs:
 #       run: mvn -B package --file demo-project/pom.xml
   build-self-hosted:
     name: Build project on-premises
+    continue-on-error: true
     runs-on: self-hosted # check array [self-hosted, windows, redish, x86] or redish only
     steps:
       - uses: actions/checkout@v2
