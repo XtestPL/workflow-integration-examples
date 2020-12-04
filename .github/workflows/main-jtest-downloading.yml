@@ -26,7 +26,8 @@ jobs:
       # - name: Download Jtest
       #   run: wget http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
       - name: Prepare Jtest
-        run: ls -l *
+        run: Get-ChildItem
+      - run: unzip parasoft_jtest_2020.2.0_win32_x86_64.zip
         
       - name: Checkout repository
         uses: actions/checkout@v2
