@@ -31,7 +31,8 @@ jobs:
         # Prerequisites:
         # 1. Configure working directory if it is different than repository root
         working-directory: demo-project
-        # 2. Enable one of the steps below
+        # 2. Enable one of the "Running" steps below
+          
         # -------------------------------------------------
         # Running with Maven
         # Prerequisites:
@@ -41,7 +42,7 @@ jobs:
         # run: mvn jtest:jtest
         # or uncomment the following to run the specified test configuration:
         run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
-        #
+        
         # -------------------------------------------------
         # Running with Gradle
         # Prerequisites:
