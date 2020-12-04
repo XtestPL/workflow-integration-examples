@@ -47,9 +47,9 @@ jobs:
         # Prerequisites:
         # 1. Configure the installed Jtest package or add the desired settings to the "jtest" block of your buildscript.
         # 2. Uncomment the following to run the "Recommended Rules" test configuration:
-        run: gradle clean assemble jtest
+        # run: gradle clean assemble jtest
         # or uncomment the following to run the specified test configuration:
-        # run: gradle clean assemble jtest -Djtest.config="builtin://Recommended Rules"
+        run: gradle clean assemble jtest "-Djtest.config=builtin://Recommended Rules"
           
       # -------------------------------------------------
       # Archive the findings reports as job artifact
