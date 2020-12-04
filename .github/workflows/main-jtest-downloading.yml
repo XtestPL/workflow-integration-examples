@@ -31,12 +31,16 @@ jobs:
     steps:
 #http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
-      - name: Download Jtest
-        run: wget -OutFile $env:app_file $env:release_url$env:app_file
-      - name: Unpack app file
-        run: unzip -o $env:app_file
+      #- name: Download Jtest
+      #  run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
+      - name: Unpack app file ${env:app_file}
+        run: |
+          unzip -o ${env:app_file}
+          chmod a+x jtest/jtestcli.exe
       - name: List working directory
         run: Get-ChildItem
+      - name: List app directory
+        run: Get-ChildItem -Path jtest
         
       - name: Checkout repository
         uses: actions/checkout@v2
