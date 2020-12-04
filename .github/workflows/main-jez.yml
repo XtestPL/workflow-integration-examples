@@ -57,7 +57,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Report files
-          path: demo-project/target/jtest/report.*
+          # path: demo-project/target/jtest/report.*
+          path: demo-project/build/reports/jtest/report.*
       
       # -------------------------------------------------
       # Upload the findings into the GitHub code scanning alert section
