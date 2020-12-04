@@ -24,15 +24,19 @@ jobs:
     name: Jtest job execution
     # The type of runner that the job will run on
     runs-on: self-hosted
+    env:
+      release_url: http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/
+      app_file: parasoft_uta_2020.2.0_intellij.zip
     
     steps:
 #http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
+      - run: echo $env:app_file
       - name: Download Jtest
-        run: wget -OutFile app.zip http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
+        run: wget -OutFile $env:app_file $env:release_url$env:app_file
       - name: Prepare Jtest
         run: Get-ChildItem
-      - run: unzip tool\parasoft_uta_2020.2.0_intellij.zip
+      - run: unzip $env:app_file
         
       - name: Checkout repository
         uses: actions/checkout@v2
