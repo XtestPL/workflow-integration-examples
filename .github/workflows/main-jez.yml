@@ -1,4 +1,6 @@
+# -------------------------------------------------
 # This workflow runs Parasoft Jtest analysis with selected build tool
+# -------------------------------------------------
 # Prerequisites:
 # 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory.
 name: Parasoft Jtest
@@ -27,6 +29,7 @@ jobs:
       # Run static analysis
       # TODO: describe how configure tool to produce SARIF
       - name: Run static analysis
+        # -------------------------------------------------
         # Configure working directory if it is different than repository root
         working-directory: demo-project
          
@@ -47,19 +50,22 @@ jobs:
         #   build-system: 'maven'
         #   build-system-args: --file demo-project/pom.xml
         #   jtest-args: -report demo-project/jtest-output
-          
+        
+      # -------------------------------------------------
       # Archive the findings reports as job artifact
       - name: Upload report artifacts
         uses: actions/upload-artifact@v2
         with:
           name: Report files
-          path: |
-            demo-project/target/jtest/report.html
-            demo-project/target/jtest/report.pdf
-          # demo-project/target/jtest/report.sarif
-            
-#      # Upload the findings into the GitHub code scanning alert section
-#      - uses: github/codeql-action/upload-sarif@v1
-#        with:
-#          sarif_file: demo-project/target/jtest/report.sarif 
-#- TODO: PRODUCE JSON with SARIF FORMAT
+          path: demo-project/target/jtest/report.*
+          # |
+          #   demo-project/target/jtest/report.html
+          #   demo-project/target/jtest/report.pdf
+          #   demo-project/target/jtest/report.sarif
+      
+      # -------------------------------------------------
+      # Upload the findings into the GitHub code scanning alert section
+      # - uses: github/codeql-action/upload-sarif@v1
+      #  with:
+      #    sarif_file: demo-project/target/jtest/report.sarif 
+      #- TODO: PRODUCE JSON with SARIF FORMAT
