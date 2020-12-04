@@ -41,7 +41,7 @@ jobs:
         # 2. Uncomment the following to run the "Recommended Rules" test configuration:
         # run: mvn jtest:jtest
         # or uncomment the following to run the specified test configuration:
-        run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
+        # run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
         
         # -------------------------------------------------
         # Running with Gradle
@@ -51,6 +51,10 @@ jobs:
         # run: gradle clean assemble jtest
         # or uncomment the following to run the specified test configuration:
         # run: gradle clean assemble jtest "-Djtest.config=builtin://Recommended Rules"
+
+        # -------------------------------------------------
+        # Running with Ant, running with Jtest data file - follow jtest examples README files and run a command
+        		# run: 
           
       # -------------------------------------------------
       # Archive the findings reports as job artifact
