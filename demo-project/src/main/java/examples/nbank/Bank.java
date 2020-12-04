@@ -24,8 +24,10 @@ public class Bank {
     private void initialize() {
         Customer smith3453 = new Customer("Jim Smith", "000-00-0000");
         this.addAccount(new Account(smith3453, 1000));
+        
         Customer miller974 = new Customer("Marc Miller", "111-11-1111");
         this.addAccount(new Account(miller974, 200));
+        
         Customer johnson265 = new Customer("John Johnson", "222-22-2222");
         this.addAccount(new Account(johnson265, 5000));
     }
