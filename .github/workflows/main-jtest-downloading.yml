@@ -15,15 +15,14 @@ on:
   # Allows to run workflow manually from the Actions tab
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: ..\
-
 jobs:
   jtest:
     name: Jtest job execution
     # The type of runner that the job will run on
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: ..\
     env:
       release_url: http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/
       app_file: parasoft_jtest_2020.2.0_win32_x86_64.zip
@@ -33,14 +32,14 @@ jobs:
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
       #- name: Download Jtest
       #  run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
-      - name: Unpack app file ${env:app_file}
+      - name: Unpack app file
         run: |
           unzip -o ${env:app_file}
           chmod a+x jtest/jtestcli.exe
       - name: List working directory
         run: Get-ChildItem
-      - name: List app directory
-        run: Get-ChildItem -Path jtest
+      # - name: List app directory
+      #   run: Get-ChildItem -Path jtest
         
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -59,7 +58,7 @@ jobs:
         # 1. Configure your Maven setup by following the Jtest User Guide:
         # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
         # 2. Uncomment the following to run the "Recommended Rules" test configuration:
-        run: mvn jtest:jtest "-Djtest.home=..\..\jtest"
+        run: mvn jtest:jtest "-Djtest.home=..\..\jtest" "-Ddtp.server=dtp.parasoft.com.pl"
         # or uncomment the following to run the specified test configuration:
         # run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
         
