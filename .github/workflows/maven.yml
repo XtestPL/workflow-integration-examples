@@ -8,17 +8,17 @@ on:
 #    branches: [ main ]
 
 jobs:
-  build-github-hosted:
-    name: Build project on github-hosted VM
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-    - name: Build with Maven
-      run: mvn -B package --file demo-project/pom.xml
+#   build-github-hosted:
+#     name: Build project on github-hosted VM
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Set up JDK 1.8
+#       uses: actions/setup-java@v1
+#       with:
+#         java-version: 1.8
+#     - name: Build with Maven
+#       run: mvn -B package --file demo-project/pom.xml
   build-self-hosted:
     name: Build project on-premises
     runs-on: self-hosted # check array [self-hosted, windows, redish, x86] or redish only
