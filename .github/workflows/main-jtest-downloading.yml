@@ -22,28 +22,30 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: ..\
+        working-directory: .\
     env:
       release_url: http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/
       app_file: parasoft_jtest_2020.2.0_win32_x86_64.zip
     
     steps:
-#http://xtest.parasoft.com.pl/builds/xtest/2020/release-2020.2.0/parasoft_uta_2020.2.0_intellij.zip
+      
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
-      #- name: Download Jtest
-      #  run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
+      - name: Download Jtest
+        run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
+        
       - name: Unpack app file
         run: |
           unzip -o ${env:app_file}
           chmod a+x jtest/jtestcli.exe
+        
+      - name: Checkout repository
+        uses: actions/checkout@v2
+          
       - name: List working directory
         run: Get-ChildItem
       # - name: List app directory
       #   run: Get-ChildItem -Path jtest
-        
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - run: echo ${{ secrets.JTEST_PARAMS }}
+
       # TODO: describe how configure tool to produce SARIF
       - name: Run static analysis
         # -------------------------------------------------
@@ -58,24 +60,11 @@ jobs:
         # 1. Configure your Maven setup by following the Jtest User Guide:
         # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
         # 2. Uncomment the following to run the "Recommended Rules" test configuration:
-        #run: mvn jtest:jtest "-Djtest.home=..\..\jtest" "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
-        run: mvn jtest:jtest "-Djtest.home=..\..\jtest" ${{ secrets.JTEST_PARAMS }}
+        #run: mvn jtest:jtest "-Djtest.home=..\jtest" "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
+        run: mvn jtest:jtest "-Djtest.home=..\jtest" ${{ secrets.JTEST_PARAMS }}
         # or uncomment the following to run the specified test configuration:
         # run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
-        
-        # -------------------------------------------------
-        # Running with Gradle
-        # Prerequisites:
-        # 1. Configure the installed Jtest package or add the desired settings to the "jtest" block of your buildscript.
-        # 2. Uncomment the following to run the "Recommended Rules" test configuration:
-        # run: gradle clean assemble jtest
-        # or uncomment the following to run the specified test configuration:
-        # run: gradle clean assemble jtest "-Djtest.config=builtin://Recommended Rules"
-
-        # -------------------------------------------------
-        # Running with Ant, running with Jtest data file - follow jtest examples README files and run a command
-        # run: 
-          
+      
       # -------------------------------------------------
       # Archive the findings reports as job artifact
       - name: Upload report artifacts
