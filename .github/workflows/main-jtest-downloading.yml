@@ -80,3 +80,10 @@ jobs:
       #  with:
       #    sarif_file: demo-project/target/jtest/report.sarif 
       #- TODO: PRODUCE JSON with SARIF FORMAT
+
+        
+      - name: Clean downloaded files
+        run: |
+          rm -fv ${env:app_file}
+          rm -rfv jtest
+          Get-ChildItem
