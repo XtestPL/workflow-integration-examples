@@ -1,5 +1,7 @@
 # -------------------------------------------------
 # This workflow runs Parasoft Jtest analysis with selected build tool (maven, gradle, etc)
+# For details on how to configure your project with Jtest please follow the Jtest examples README file
+# TODO: describe how configure tool to produce SARIF
 # -------------------------------------------------
 # Prerequisites:
 # 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory
@@ -10,6 +12,7 @@ on:
   
   # Triggers the workflow on push, pull request, or other events
   # push:
+  #   branches: [ main ]
   # pull_request:
   #   branches: [ main ]
 
@@ -26,7 +29,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # TODO: describe how configure tool to produce SARIF
       - name: Run static analysis
         # -------------------------------------------------
         # Prerequisites:
