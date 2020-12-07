@@ -84,6 +84,6 @@ jobs:
         
       - name: Clean downloaded files
         run: |
-          rm -fv ${env:app_file}
-          rm -rfv jtest
+          Remove-Item ${env:app_file} -Force
+          Remove-Item jtest -Force -Recurse
           Get-ChildItem
