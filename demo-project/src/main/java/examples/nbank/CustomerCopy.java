@@ -19,6 +19,7 @@ public class CustomerCopy {
 
     private String _ssn;
 
+    
     public CustomerCopy(String name, String ssn) {
         if (name.length() >= 20)
             throw new IllegalArgumentException("Name cannot be longer than 20 characters");
