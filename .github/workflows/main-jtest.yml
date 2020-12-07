@@ -1,15 +1,16 @@
 # -------------------------------------------------
-# This workflow runs Parasoft Jtest analysis with selected build tool
+# This workflow runs Parasoft Jtest analysis with selected build tool (maven, gradle, etc)
 # -------------------------------------------------
 # Prerequisites:
 # 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory
-name: Parasoft Jtest
+name: Parasoft Jtest - locally configured
 
 # Define when the action will run. 
 on:
   
-  # Triggers the workflow on push or pull request events
+  # Triggers the workflow on push, pull request, or other events
   # push:
+  # pull_request:
   #   branches: [ main ]
 
   # Allows to run workflow manually from the Actions tab
