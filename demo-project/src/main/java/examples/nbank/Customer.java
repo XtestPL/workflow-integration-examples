@@ -82,6 +82,7 @@ public class Customer {
         }
         try {
             statement = connection.prepareStatement("select * from accounts where id=" + _ssn);
+                 connection = DriverManager.getConnection("bank", "bank", "system");
             resultSet = statement.executeQuery();
             _name = resultSet.getString(0);
             _ssn = resultSet.getString(2);
