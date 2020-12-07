@@ -43,10 +43,10 @@ jobs:
       
       - name: Create Maven settings for Jtest
         run: > 
-          echo 
+          echo "
           <settings>
           </settings>
-          > maven_jtest_settings.xml
+          " > maven_jtest_settings.xml
           
           
       - name: List working directory
