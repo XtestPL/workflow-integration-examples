@@ -1,5 +1,5 @@
 # -------------------------------------------------
-# This workflow runs Parasoft Jtest analysis with selected build tool (maven, gradle, etc)
+# This workflow downloads, configures and runs Parasoft Jtest analysis with selected build tool (maven, gradle, etc)
 # For details on how to configure your project with Jtest please refer to the Jtest examples README file
 # TODO: describe how configure tool to produce SARIF
 # -------------------------------------------------
