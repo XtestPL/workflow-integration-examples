@@ -1,15 +1,16 @@
 # -------------------------------------------------
-# This workflow runs Parasoft Jtest analysis with selected build tool
+# This workflow runs Parasoft Jtest analysis with selected build tool (maven, gradle, etc)
 # -------------------------------------------------
 # Prerequisites:
-# 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory
+# 1. Set up the Jtest settings via the 'JTEST_PARAMS' secret variable in GitHub Settings or provide them to the Jtest run command.
 name: Parasoft Jtest - from scratch
 
 # Define when the action will run. 
 on:
   
-  # Triggers the workflow on push or pull request events
+  # Triggers the workflow on push, pull request, or other events
   # push:
+  # pull_request:
   #   branches: [ main ]
 
   # Allows to run workflow manually from the Actions tab
@@ -30,13 +31,13 @@ jobs:
     steps:
       
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
-      #- name: Download Jtest
-      #  run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
+      - name: Download Jtest
+        run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
         
-      #- name: Unpack app file
-      #  run: |
-      #    unzip -o ${env:app_file}
-      #    chmod a+x jtest/jtestcli.exe
+      - name: Unpack app file
+        run: |
+          unzip -o ${env:app_file}
+          chmod a+x jtest/jtestcli.exe
         
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -82,18 +83,16 @@ jobs:
         # Prerequisites:
         # 1. Configure working directory if it is different than repository root
         working-directory: demo-project
-        # 2. Enable one of the "Running" steps below
+        # 2. Enable the "Running" step below
           
         # -------------------------------------------------
         # Running with Maven
         # Prerequisites:
-        # 1. Configure your Maven setup by following the Jtest User Guide:
-        # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
-        # 2. Uncomment the following to run the "Recommended Rules" test configuration:
+        # 1. Uncomment the following to run the "Recommended Rules" test configuration:
         #run: mvn --settings ..\..\maven_jtest_settings.xml jtest:jtest "-Djtest.home=..\..\jtest" "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
         run: mvn --settings ..\..\maven_jtest_settings.xml jtest:jtest ${{ secrets.JTEST_PARAMS }}
         # or uncomment the following to run the specified test configuration:
-        # run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
+        # run: mvn --settings ..\..\maven_jtest_settings.xml jtest:jtest "-Djtest.config=builtin://Recommended Rules" ${{ secrets.JTEST_PARAMS }}
       
       # -------------------------------------------------
       # Archive the findings reports as job artifact
