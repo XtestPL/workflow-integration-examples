@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Represents a bank customer..
+ * Represents a bank customer...
  * 
  * @author Mark Wilson (mwilson@acme.com)
  */
