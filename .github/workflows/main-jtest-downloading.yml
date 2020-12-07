@@ -58,7 +58,7 @@ jobs:
         # 1. Configure your Maven setup by following the Jtest User Guide:
         # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
         # 2. Uncomment the following to run the "Recommended Rules" test configuration:
-        run: mvn jtest:jtest "-Djtest.home=..\..\jtest" "-Ddtp.server=dtp.parasoft.com.pl"
+        run: mvn jtest:jtest "-Djtest.home=..\..\jtest" "-Dproperty.jtest.dtp.server=dtp.parasoft.com.pl"
         # or uncomment the following to run the specified test configuration:
         # run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
         
