@@ -30,19 +30,28 @@ jobs:
     steps:
       
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
-      - name: Download Jtest
-        run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
+      #- name: Download Jtest
+      #  run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
         
-      - name: Unpack app file
-        run: |
-          unzip -o ${env:app_file}
-          chmod a+x jtest/jtestcli.exe
+      #- name: Unpack app file
+      #  run: |
+      #    unzip -o ${env:app_file}
+      #    chmod a+x jtest/jtestcli.exe
         
       - name: Checkout repository
         uses: actions/checkout@v2
+      
+      - name: Create Maven settings for Jtest
+        run: > 
+          echo 
+          <settings>
+          </settings>
+          > maven_jtest_settings.xml
+          
           
       - name: List working directory
         run: Get-ChildItem
+      - run: cat maven_jtest_settings.xml
       # - name: List app directory
       #   run: Get-ChildItem -Path jtest
 
@@ -61,7 +70,7 @@ jobs:
         # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
         # 2. Uncomment the following to run the "Recommended Rules" test configuration:
         #run: mvn jtest:jtest "-Djtest.home=..\..\jtest" "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
-        run: mvn jtest:jtest "-Djtest.home=..\..\jtest" ${{ secrets.JTEST_PARAMS }}
+        run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest "-Djtest.home=..\..\jtest" ${{ secrets.JTEST_PARAMS }}
         # or uncomment the following to run the specified test configuration:
         # run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
       
