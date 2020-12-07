@@ -10,7 +10,7 @@ import static org.mockito.Mockito.mock;
 import org.junit.Test;
 
 /**
- * Parasoft Jtest UTA: Test class for Account
+ * Parasoft Jtest UTA: Test class for Account.
  *
  * @author dszyszlak
  * @see Account
