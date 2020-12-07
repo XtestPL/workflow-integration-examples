@@ -80,11 +80,3 @@ jobs:
       #  with:
       #    sarif_file: demo-project/target/jtest/report.sarif 
       #- TODO: PRODUCE JSON with SARIF FORMAT
-
-        
-      - name: Clean downloaded files
-        continue-on-error: true
-        run: |
-          Remove-Item ${env:app_file} -Force
-          Remove-Item jtest -Force -Recurse
-          Get-ChildItem
