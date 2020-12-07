@@ -83,6 +83,7 @@ jobs:
 
         
       - name: Clean downloaded files
+        continue-on-error: true
         run: |
           Remove-Item ${env:app_file} -Force
           Remove-Item jtest -Force -Recurse
