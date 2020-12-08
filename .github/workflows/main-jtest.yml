@@ -11,10 +11,10 @@ name: Parasoft Jtest - locally configured
 on:
   
   # Triggers the workflow on push, pull request, or other events
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
+  #pull_request:
+  #  branches: [ main ]
 
   # Allows to run workflow manually from the Actions tab
   workflow_dispatch:
@@ -69,10 +69,9 @@ jobs:
           path: demo-project/target/jtest/report.*
           # path: demo-project/build/reports/jtest/report.*
       
-      # TEMPORARY TO PREPAREPULL REQUEST RESULTS:
       # -------------------------------------------------
       # Upload the findings into the GitHub code scanning alert section
-      - uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: C:\Users\dszyszlak\Downloads\example_results.sarif 
+      #- uses: github/codeql-action/upload-sarif@v1
+      #  with:
+      #    sarif_file: demo-project/target/jtest/report.sarif  
       #- TODO: PRODUCE JSON with SARIF FORMAT
