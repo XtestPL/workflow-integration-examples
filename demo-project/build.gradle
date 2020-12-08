@@ -2,6 +2,7 @@
 description = '<h3>Jtest demo project</h3><p>The project contains sample source code with various errors, and bad practice examples which can be detected by Jtest analysis.</p>'
 
 apply plugin: 'java'
+
 apply plugin: 'maven'
 
 group = theGroup
