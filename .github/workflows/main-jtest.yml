@@ -69,9 +69,10 @@ jobs:
           path: demo-project/target/jtest/report.*
           # path: demo-project/build/reports/jtest/report.*
       
+      # TEMPORARY TO PREPAREPULL REQUEST RESULTS:
       # -------------------------------------------------
       # Upload the findings into the GitHub code scanning alert section
-      # - uses: github/codeql-action/upload-sarif@v1
-      #  with:
-      #    sarif_file: demo-project/target/jtest/report.sarif 
+      - uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: C:\Users\dszyszlak\Downloads\example_results.sarif 
       #- TODO: PRODUCE JSON with SARIF FORMAT
