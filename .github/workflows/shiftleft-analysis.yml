@@ -8,8 +8,8 @@ on:
     workflow_dispatch:
 #     push:
 #         branches: [ main ]
-    pull_request:
-        branches: [ main ]
+#     pull_request:
+#         branches: [ main ]
 jobs:
   Scan-Build:
     # Scan runs on ubuntu, mac and windows
