@@ -40,12 +40,12 @@ jobs:
       - name: Unpack app file
         run: |
              if [ "$RUNNER_OS" == "Linux" ]; then
-                          tar -xzf ${app_file} && chmod a+x jtest/jtestcli
+                  tar -xzf ${app_file} && chmod a+x jtest/jtestcli
              elif [ "$RUNNER_OS" == "Windows" ]; then
-                          unzip -q -o ${app_file} && chmod a+x jtest/jtestcli.exe
+                  unzip -q -o ${app_file} && chmod a+x jtest/jtestcli.exe
              else
-                          echo "$RUNNER_OS not supported"
-                          exit 1
+                  echo "$RUNNER_OS not supported"
+                  exit 1
              fi
 
       - name: Checkout repository
