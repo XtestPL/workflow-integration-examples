@@ -37,16 +37,13 @@ jobs:
       - name: Download Jtest
         run: wget -nv -O ${app_file} ${release_url}${app_file}
 
-      - name: Unpack app file
-        run: |
-             if [ "$RUNNER_OS" == "Linux" ]; then
-                  tar -xzf "$app_file" && chmod a+x jtest/jtestcli
-             elif [ "$RUNNER_OS" == "Windows" ]; then
-                  unzip -q -o "$app_file" && chmod a+x jtest/jtestcli.exe
-             else
-                  echo "$RUNNER_OS not supported"
-                  exit 1
-             fi
+      - name: Unpack app file on Linux
+        if: runner.os == 'Linux'
+        run: tar -xzf ${app_file} && chmod a+x jtest/jtestcli
+
+      - name: Unpack app file on Windows
+        run: unzip -q -o ${app_file} && chmod a+x jtest/jtestcli.exe
+        if: runner.os == 'Windows'
 
       - name: Checkout repository
         uses: actions/checkout@v2
