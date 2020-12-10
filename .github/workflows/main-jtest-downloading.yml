@@ -63,7 +63,7 @@ jobs:
                   <activeByDefault>true</activeByDefault>
                 </activation>
                 <properties>
-                  <jtest.home>..\..\jtest</jtest.home>
+                  <jtest.home>../../jtest</jtest.home>
                 </properties>
                 <pluginRepositories>
                   <pluginRepository>
