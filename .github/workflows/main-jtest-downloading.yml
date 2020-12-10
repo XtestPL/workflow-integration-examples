@@ -1,10 +1,10 @@
 # -------------------------------------------------
 # This workflow downloads, configures and runs Parasoft Jtest analysis with selected build tool (maven, gradle, etc)
 # For details on how to configure your project with Jtest please refer to the Jtest examples README file
-# TODO: describe how configure tool to produce SARIF
 # -------------------------------------------------
 # Prerequisites:
 # 1. Set up the Jtest settings via the 'JTEST_PARAMS' secret variable in GitHub Settings or provide them to the Jtest run command.
+# 2. Include 'sarif' value for report.format key in the settings (e.g. -Dproperty.report.format=html,pdf,sarif)
 name: Parasoft Jtest - from scratch
 
 # Define when the action will run. 
@@ -27,6 +27,7 @@ jobs:
     defaults:
       run:
         working-directory: ..\
+        shell: bash
     env:
       release_url: http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/
       app_file: parasoft_jtest_2020.2.0_win32_x86_64.zip
@@ -84,7 +85,7 @@ jobs:
         # -------------------------------------------------
         # Prerequisites:
         # 1. Configure working directory if it is different than repository root
-        working-directory: demo-project
+        working-directory: jtest-demo
         # 2. Enable the "Running" step below.
         # If you want to fail the step when any Jtest violation is reported, add "-Djtest.fail=true" to Jtest parameters run options.
           
@@ -93,9 +94,9 @@ jobs:
         # Prerequisites:
         # 1. Uncomment the following to run the "Recommended Rules" test configuration:
         #run: mvn --settings ..\..\maven_jtest_settings.xml jtest:jtest "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
-        run: mvn --settings ..\..\maven_jtest_settings.xml jtest:jtest ${{ secrets.JTEST_PARAMS }}
+        run: ./mvnw --settings ..\..\maven_jtest_settings.xml jtest:jtest ${{ secrets.JTEST_PARAMS }}
         # or uncomment the following to run the specified test configuration:
-        # run: mvn --settings ..\..\maven_jtest_settings.xml jtest:jtest "-Djtest.config=builtin://Recommended Rules" ${{ secrets.JTEST_PARAMS }}
+        # run: ./mvnw --settings ..\..\maven_jtest_settings.xml jtest:jtest "-Djtest.config=builtin://Recommended Rules" ${{ secrets.JTEST_PARAMS }}
       
       # -------------------------------------------------
       # Archive the findings reports as job artifact
@@ -103,12 +104,11 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Report files
-          path: demo-project/target/jtest/report.*
-          # path: demo-project/build/reports/jtest/report.*
+          path: jtest-demo/target/jtest/report.*
       
       # -------------------------------------------------
       # Upload the findings into the GitHub code scanning alert section
       # - uses: github/codeql-action/upload-sarif@v1
       #  with:
-      #    sarif_file: demo-project/target/jtest/report.sarif 
+      #    sarif_file: jtest-demo/target/jtest/report.sarif 
       #- TODO: PRODUCE JSON with SARIF FORMAT
