@@ -39,15 +39,20 @@ jobs:
 
       - name: Unpack app file
         run: |
-          unzip -q -o ${app_file}
-          chmod a+x jtest/jtestcli.exe    
-      
+             if [ "$RUNNER_OS" == "Linux" ]; then
+                          tar -xzf ${app_file} && chmod a+x jtest/jtestcli
+             elif [ "$RUNNER_OS" == "Windows" ]; then
+                          unzip -q -o ${app_file} && chmod a+x jtest/jtestcli.exe
+             else
+                          echo "$RUNNER_OS not supported"
+                          exit 1
+             fi
+
       - name: Checkout repository
         uses: actions/checkout@v2
       
       - name: Create Maven settings for Jtest
-        run: > 
-          echo '
+        run: echo '
           <settings>
             <pluginGroups>
               <pluginGroup>com.parasoft.jtest</pluginGroup>
@@ -90,7 +95,7 @@ jobs:
         # Running with Maven
         # Prerequisites:
         # 1. Uncomment the following to run the "Recommended Rules" test configuration:
-        #run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
+        #run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin" "-Dproperty.report.format=html,sarif"    
         run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest ${{ secrets.JTEST_PARAMS }}
         # or uncomment the following to run the specified test configuration:
         # run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest "-Djtest.config=builtin://Recommended Rules" ${{ secrets.JTEST_PARAMS }}
