@@ -33,6 +33,16 @@ jobs:
       app_file: parasoft_jtest_2020.2.0_win32_x86_64.zip
     
     steps:
+      - name:  Install
+        run:   |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+              apt install important_linux_software
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+              choco install important_windows_software
+          else
+              echo "$RUNNER_OS not supported"
+              exit 1
+          fi
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
       - name: Download Jtest
         run: wget -nv -O ${app_file} ${release_url}${app_file}
