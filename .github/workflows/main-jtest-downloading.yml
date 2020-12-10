@@ -11,8 +11,8 @@ name: Parasoft Jtest - from scratch
 on:
   
   # Triggers the workflow on push, pull request, or other events
-  # push:
-  #   branches: [ main ]
+  push:
+    branches: [ main ]
   # pull_request:
   #   branches: [ main ]
 
@@ -26,29 +26,28 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: ..\
+        working-directory: ../
         shell: bash
     env:
       release_url: http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/
       app_file: parasoft_jtest_2020.2.0_win32_x86_64.zip
     
     steps:
-      
 #http://xtest.parasoft.com.pl/builds/jtest/2020/release-2020.2.0/parasoft_jtest_2020.2.0_win32_x86_64.zip
       - name: Download Jtest
-        run: wget -OutFile ${env:app_file} ${env:release_url}${env:app_file}
-        
+        run: wget -nv -O ${app_file} ${release_url}${app_file}
+
       - name: Unpack app file
         run: |
-          unzip -o ${env:app_file}
-          chmod a+x jtest/jtestcli.exe
-        
+          unzip -q -o ${app_file}
+          chmod a+x jtest/jtestcli.exe    
+      
       - name: Checkout repository
         uses: actions/checkout@v2
       
       - name: Create Maven settings for Jtest
         run: > 
-          echo "
+          echo '
           <settings>
             <pluginGroups>
               <pluginGroup>com.parasoft.jtest</pluginGroup>
@@ -74,18 +73,16 @@ jobs:
             </profiles>
    
           </settings>
-          " > maven_jtest_settings.xml
-          
+          ' > maven_jtest_settings.xml
+      
       - name: List working directory
-        run: Get-ChildItem
-      # - name: List app directory
-      #   run: Get-ChildItem -Path jtest
+        run: ls -l
 
       - name: Run static analysis
         # -------------------------------------------------
         # Prerequisites:
         # 1. Configure working directory if it is different than repository root
-        working-directory: jtest-demo
+        working-directory: demo-project
         # 2. Enable the "Running" step below.
         # If you want to fail the step when any Jtest violation is reported, add "-Djtest.fail=true" to Jtest parameters run options.
           
@@ -93,10 +90,10 @@ jobs:
         # Running with Maven
         # Prerequisites:
         # 1. Uncomment the following to run the "Recommended Rules" test configuration:
-        #run: mvn --settings ..\..\maven_jtest_settings.xml jtest:jtest "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
-        run: ./mvnw --settings ..\..\maven_jtest_settings.xml jtest:jtest ${{ secrets.JTEST_PARAMS }}
+        #run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest "-Dproperty.dtp.server=dtp.parasoft.com.pl" "-Dproperty.dtp.port=8443" "-Dproperty.dtp.user=admin" "-Dproperty.dtp.password=admin"    
+        run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest ${{ secrets.JTEST_PARAMS }}
         # or uncomment the following to run the specified test configuration:
-        # run: ./mvnw --settings ..\..\maven_jtest_settings.xml jtest:jtest "-Djtest.config=builtin://Recommended Rules" ${{ secrets.JTEST_PARAMS }}
+        # run: mvn --settings ../../maven_jtest_settings.xml jtest:jtest "-Djtest.config=builtin://Recommended Rules" ${{ secrets.JTEST_PARAMS }}
       
       # -------------------------------------------------
       # Archive the findings reports as job artifact
@@ -104,11 +101,11 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Report files
-          path: jtest-demo/target/jtest/report.*
+          path: demo-project/target/jtest/report.*
       
       # -------------------------------------------------
       # Upload the findings into the GitHub code scanning alert section
       # - uses: github/codeql-action/upload-sarif@v1
       #  with:
-      #    sarif_file: jtest-demo/target/jtest/report.sarif 
+      #    sarif_file: demo-project/target/jtest/report.sarif 
       #- TODO: PRODUCE JSON with SARIF FORMAT
