@@ -18,14 +18,18 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    
+    - name: Checkout repository
+      uses: actions/checkout@v2
     # Runs code analysis with Jtest
+    
     - name: Run Jtest
-      id: jtest
-      uses: parasoft/run-jtest-action@0.0.2
-      with:
+      working-directory: demo-project
+      #id: jtest
+      run: jtestcli.exe -config "builtin://Recommended Rules" -property report.format=xml,html,sarif -report "reports" -data "demo-project/jtest.data.json"
+      #uses: parasoft/run-jtest-action@0.0.2
+      #with:
         #Uses the jtest.data.json generated with the Maven command in the previous step
-        input: demo-project/jtest.data.json
+       # input: demo-project/jtest.data.json
         
         # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
     - name: Upload results (SARIF)
