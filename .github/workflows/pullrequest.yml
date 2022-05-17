@@ -22,7 +22,7 @@ jobs:
     # Runs code analysis with Jtest
     - name: Run Jtest
       id: jtest
-      uses: parasoft/run-jtest-action@1.0.0
+      uses: parasoft/run-jtest-action@0.0.2
       with:
         #Uses the jtest.data.json generated with the Maven command in the previous step
         input: demo-project/jtest.data.json
@@ -39,5 +39,5 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Static analysis reports
-        path: reports/*.*
+          name: Static analysis reports
+          path: reports/*.*
