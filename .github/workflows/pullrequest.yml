@@ -26,7 +26,7 @@ jobs:
       working-directory: demo-project
       #id: jtest
       #run: D:/_JTest/parasoft_jtest_16.05/jtest/jtestcli.exe -config "builtin://Recommended Rules" -property report.format=xml,html,sarif -report "reports" -data demo.data.json
-      run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules" -property report.format=xml,html,sarif -report "reports"
+      run: mvn clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
       #uses: parasoft/run-jtest-action@0.0.2
       #with:
         #Uses the jtest.data.json generated with the Maven command in the previous step
