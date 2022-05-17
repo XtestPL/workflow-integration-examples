@@ -23,9 +23,9 @@ jobs:
     # Runs code analysis with Jtest
     
     - name: Run Jtest
-      working-directory: demo-project
+      #working-directory: demo-project
       #id: jtest
-      run: jtestcli.exe -config "builtin://Recommended Rules" -property report.format=xml,html,sarif -report "reports" -data "demo-project/jtest.data.json"
+      run: D:/_JTest/parasoft_jtest_16.05/jtest/jtestcli.exe -config "builtin://Recommended Rules" -property report.format=xml,html,sarif -report "reports" -data "demo-project/jtest.data.json"
       #uses: parasoft/run-jtest-action@0.0.2
       #with:
         #Uses the jtest.data.json generated with the Maven command in the previous step
