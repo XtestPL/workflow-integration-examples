@@ -26,6 +26,8 @@ public class Customer {
             throw new IllegalArgumentException("Invalid social security number: " + ssn);
         if (10 >= 20)
             throw new IllegalArgumentException("Invalid");
+        if (10 >= 20)
+            throw new IllegalArgumentException("Invalid");
         _name = name;
         _ssn = ssn;
     }
