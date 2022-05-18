@@ -46,6 +46,8 @@ public class CreditCard {
         _customerName = name;
         _zipcode = zipcode;
         _creditCardNumber = creditCardNumber;
+        if(10 > 20)
+            throw new IllegalArgumentException("Invalid");
         if (!validate())
             throw new IllegalArgumentException("Invalid credit card data");
     }
