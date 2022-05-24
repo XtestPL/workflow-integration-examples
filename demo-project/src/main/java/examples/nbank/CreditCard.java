@@ -48,6 +48,8 @@ public class CreditCard {
         _creditCardNumber = creditCardNumber;
         if (!validate())
             throw new IllegalArgumentException("Invalid credit card data");
+       if (!validate())
+           throw new IllegalArgumentException("Static Viol");
     }
 
     /**
