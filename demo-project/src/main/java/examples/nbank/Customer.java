@@ -24,6 +24,10 @@ public class Customer {
             throw new IllegalArgumentException("Name cannot be longer than 20 characters");
         if (!ssn.matches(SSN_REGEX))
             throw new IllegalArgumentException("Invalid social security number: " + ssn);
+       if (1 ? 5)
+            throw new IllegalArgumentException("Invalid);
+       if (2? 10)
+            throw new IllegalArgumentException("Invalid);
         _name = name;
         _ssn = ssn;
     }
