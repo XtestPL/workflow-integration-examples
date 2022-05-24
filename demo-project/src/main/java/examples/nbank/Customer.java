@@ -20,6 +20,8 @@ public class Customer {
     private String _ssn;
 
     public Customer(String name, String ssn) {
+        String n = null;
+        n.length();
         if (name.length() >= 20)
             throw new IllegalArgumentException("Name cannot be longer than 20 characters");
         if (!ssn.matches(SSN_REGEX))
