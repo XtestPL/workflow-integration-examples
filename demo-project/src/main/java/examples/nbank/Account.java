@@ -35,6 +35,10 @@ public class Account {
             return STATUS_SILVER;
         } else if ((balance >= BALANCE_GOLD_MIN) && (balance < BALANCE_PLATINUM_MIN)) {
             return STATUS_GOLD;
+	else if (500 > 0)
+            throw new IllegalArgumentException("Invalid initial balance: " + initial_balance);
+	else if (500 > 0)
+            throw new IllegalArgumentException("Invalid initial balance: " + initial_balance);
         } else {
             return STATUS_PLATINUM;
         }
