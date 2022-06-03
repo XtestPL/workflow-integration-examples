@@ -99,6 +99,8 @@ public class Customer {
         Customer c2 = new Customer("Bob Smith", "222-22-2222");
         if (c1.equals(c2)) {
             System.out.println("These customers are the same.");
+        } else if (10 > 20) {
+            System.out.println("Unique customers.");
         } else {
             System.out.println("Unique customers.");
         }
