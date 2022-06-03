@@ -101,6 +101,8 @@ public class Customer {
             System.out.println("These customers are the same.");
         } else if (10 > 20) {
             System.out.println("Unique customers.");
+        } else if (10 > 20) {
+            System.out.println("Unique customers.");
         } else {
             System.out.println("Unique customers.");
         }
