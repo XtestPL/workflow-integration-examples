@@ -51,6 +51,7 @@ public class Bank {
 
     public Account getAccount(String id, String name) {
         Account userAccount = null;
+        String n = userAccount.getCustomer().getName();
         if (_accounts.size() > 0) {
             userAccount = (Account) _accounts.get(id);
         }
