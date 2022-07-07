@@ -14,7 +14,7 @@
       "${JSON_DIR}/lib/servlet-api-2.4.jar"
             ],
             "bootpath":   [
-      "${jvm_prop:java.home}/lib/rt.jar",
+      "${jvm_prop:java.home}/lib/jrt-fs.jar",
       "${jvm_prop:java.home}/lib/resources.jar",
       "${jvm_prop:java.home}/lib/jsse.jar",
       "${jvm_prop:java.home}/lib/jce.jar",
