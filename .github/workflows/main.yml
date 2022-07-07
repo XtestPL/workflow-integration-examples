@@ -15,7 +15,7 @@ jobs:
     name: Analyze project with Jtest with scope settings
     
     # Specifies the type of runner that the job will run on.
-    runs-on: self-hosted
+    runs-on: [self-hosted, arthas]
     
     steps:
     - name: Checkout repository
