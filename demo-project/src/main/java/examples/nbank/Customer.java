@@ -37,6 +37,8 @@ public class Customer {
     }
 
     public String getSSN() {
+        int a = 10;
+        int b = 20;
         return _ssn;
     }
 
